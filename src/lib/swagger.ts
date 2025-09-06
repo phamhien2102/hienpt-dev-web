@@ -25,6 +25,130 @@ export const swaggerSpec = {
     },
   ],
   paths: {
+    '/auth/login': {
+      post: {
+        summary: 'User login',
+        description: 'Authenticate user and return access token',
+        tags: ['Authentication'],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                required: ['email', 'password'],
+                properties: {
+                  email: {
+                    type: 'string',
+                    format: 'email',
+                    description: 'User email address',
+                    example: 'admin@example.com'
+                  },
+                  password: {
+                    type: 'string',
+                    description: 'User password',
+                    example: 'admin123'
+                  }
+                }
+              }
+            }
+          }
+        },
+        responses: {
+          '200': {
+            description: 'Login successful',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    success: { type: 'boolean', example: true },
+                    user: { $ref: '#/components/schemas/User' },
+                    token: { type: 'string', example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' },
+                    message: { type: 'string', example: 'Login successful' }
+                  }
+                }
+              }
+            }
+          },
+          '401': {
+            description: 'Invalid credentials',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    success: { type: 'boolean', example: false },
+                    error: { type: 'string', example: 'Invalid email or password' }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    '/auth/logout': {
+      post: {
+        summary: 'User logout',
+        description: 'Logout user and invalidate session',
+        tags: ['Authentication'],
+        responses: {
+          '200': {
+            description: 'Logout successful',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    success: { type: 'boolean', example: true },
+                    message: { type: 'string', example: 'Logout successful' }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    '/auth/me': {
+      get: {
+        summary: 'Get current user profile',
+        description: 'Get the profile of the currently authenticated user',
+        tags: ['Authentication'],
+        responses: {
+          '200': {
+            description: 'User profile retrieved successfully',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    success: { type: 'boolean', example: true },
+                    data: { $ref: '#/components/schemas/User' },
+                    message: { type: 'string', example: 'User profile retrieved successfully' }
+                  }
+                }
+              }
+            }
+          },
+          '401': {
+            description: 'Unauthorized',
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'object',
+                  properties: {
+                    success: { type: 'boolean', example: false },
+                    error: { type: 'string', example: 'Invalid or expired token' }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     '/users': {
       get: {
         summary: 'Get all users',
@@ -704,6 +828,10 @@ export const swaggerSpec = {
     },
   },
   tags: [
+    {
+      name: 'Authentication',
+      description: 'User authentication and authorization operations',
+    },
     {
       name: 'Users',
       description: 'User management operations',

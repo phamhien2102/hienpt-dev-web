@@ -65,3 +65,33 @@ export interface CreatePostForm {
 export interface UpdatePostForm extends Partial<CreatePostForm> {
   authorId?: string;
 }
+
+// Authentication types
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  success: boolean;
+  user?: User;
+  token?: string;
+  message?: string;
+  error?: string;
+}
+
+export interface AuthUser {
+  id: string;
+  name: string;
+  email: string;
+  role: 'admin' | 'moderator' | 'user';
+  isActive: boolean;
+}
+
+export interface AuthContextType {
+  user: AuthUser | null;
+  login: (email: string, password: string) => Promise<boolean>;
+  logout: () => void;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+}
