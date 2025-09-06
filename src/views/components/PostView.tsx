@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { Post, CreatePostForm, UpdatePostForm } from '@/types';
 import { PostService } from '@/services/PostService';
 import { BaseView, LoadingSpinner, ErrorMessage } from './BaseView';
+import { formatDate } from '@/utils/dateUtils';
 
 interface PostListProps {
   onPostSelect?: (post: Post) => void;
@@ -50,7 +51,7 @@ export const PostList: React.FC<PostListProps> = ({ onPostSelect, authorId }) =>
 
   useEffect(() => {
     fetchPosts();
-  }, [authorId]);
+  }, [authorId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handlePageChange = (newPage: number) => {
     fetchPosts(newPage);
@@ -112,8 +113,8 @@ export const PostList: React.FC<PostListProps> = ({ onPostSelect, authorId }) =>
                   </span>
                 ))}
               </div>
-              <p className="text-sm text-gray-500">
-                {new Date(post.createdAt).toLocaleDateString()}
+              <p className="text-sm text-gray-500" suppressHydrationWarning>
+                {formatDate(post.createdAt)}
               </p>
             </div>
           </div>

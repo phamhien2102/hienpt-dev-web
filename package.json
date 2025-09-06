@@ -9,6 +9,7 @@
     "lint": "eslint",
     "setup:supabase": "node scripts/setup-supabase.js",
     "show:users": "node scripts/show-users.js",
+    "show:posts": "node scripts/show-posts.js",
     "test:supabase": "node scripts/test-supabase.js"
   },
   "dependencies": {

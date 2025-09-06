@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { User, CreateUserForm, UpdateUserForm } from '@/types';
 import { UserService } from '@/services/UserService';
 import { BaseView, LoadingSpinner, ErrorMessage } from './BaseView';
+import { formatDate } from '@/utils/dateUtils';
 
 interface UserListProps {
   onUserSelect?: (user: User) => void;
@@ -41,7 +42,7 @@ export const UserList: React.FC<UserListProps> = ({ onUserSelect }) => {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handlePageChange = (newPage: number) => {
     fetchUsers(newPage);
@@ -93,8 +94,8 @@ export const UserList: React.FC<UserListProps> = ({ onUserSelect }) => {
                 }`}>
                   {user.isActive ? 'Active' : 'Inactive'}
                 </span>
-                <p className="text-sm text-gray-500 mt-1">
-                  Created: {new Date(user.createdAt).toLocaleDateString()}
+                <p className="text-sm text-gray-500 mt-1" suppressHydrationWarning>
+                  Created: {formatDate(user.createdAt)}
                 </p>
               </div>
             </div>
