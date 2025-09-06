@@ -14,10 +14,12 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.2",
+    "@types/swagger-ui-react": "^5.18.0",
     "dotenv": "^17.2.2",
     "next": "15.5.2",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "swagger-ui-react": "^5.28.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

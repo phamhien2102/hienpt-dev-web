@@ -1,6 +1,8 @@
 // API route for individual user operations
 import { NextRequest, NextResponse } from 'next/server';
 import { UserController } from '@/controllers/UserController';
+import { createCorsResponse, createCorsOptionsResponse } from '@/utils/cors';
+
 
 const userController = new UserController();
 
@@ -59,13 +61,13 @@ export async function GET(
     const user = sampleUsers.find(u => u.id === resolvedParams.id);
     
     if (!user) {
-      return NextResponse.json(
+      return createCorsResponse(
         { success: false, error: 'User not found' },
-        { status: 404 }
+        404
       );
     }
 
-    return NextResponse.json({
+    return createCorsResponse({
       success: true,
       data: user,
       message: 'Sample data - Configure Supabase for real data'
@@ -80,7 +82,7 @@ export async function GET(
 
   const mockRes = {
     status: (code: number) => ({
-      json: (data: any) => NextResponse.json(data, { status: code }),
+      json: (data: any) => createCorsResponse(data, code),
     }),
   } as any;
 
@@ -91,7 +93,7 @@ export async function GET(
       status: (code: number) => ({
         json: (data: any) => {
           responseData = data;
-          return NextResponse.json(data, { status: code });
+          return createCorsResponse(data, code);
         },
       }),
     };
@@ -100,17 +102,17 @@ export async function GET(
     
     // If no response data was captured, return a default response
     if (!responseData) {
-      return NextResponse.json({ 
+      return createCorsResponse({ 
         success: false, 
         error: 'No data returned from controller'
-      }, { status: 500 });
+      }, 500);
     }
     
-    return NextResponse.json(responseData);
+    return createCorsResponse(responseData);
   } catch (error) {
-    return NextResponse.json(
+    return createCorsResponse(
       { success: false, error: 'Internal server error' },
-      { status: 500 }
+      500
     );
   }
 }
@@ -131,17 +133,17 @@ export async function PUT(
 
   const mockRes = {
     status: (code: number) => ({
-      json: (data: any) => NextResponse.json(data, { status: code }),
+      json: (data: any) => createCorsResponse(data, code),
     }),
   } as any;
 
   try {
     await userController.updateUser(mockReq, mockRes);
-    return NextResponse.json({ success: true });
+    return createCorsResponse({ success: true });
   } catch (error) {
-    return NextResponse.json(
+    return createCorsResponse(
       { success: false, error: 'Internal server error' },
-      { status: 500 }
+      500
     );
   }
 }
@@ -160,17 +162,22 @@ export async function DELETE(
 
   const mockRes = {
     status: (code: number) => ({
-      json: (data: any) => NextResponse.json(data, { status: code }),
+      json: (data: any) => createCorsResponse(data, code),
     }),
   } as any;
 
   try {
     await userController.deleteUser(mockReq, mockRes);
-    return NextResponse.json({ success: true });
+    return createCorsResponse({ success: true });
   } catch (error) {
-    return NextResponse.json(
+    return createCorsResponse(
       { success: false, error: 'Internal server error' },
-      { status: 500 }
+      500
     );
   }
+}
+
+// Handle OPTIONS requests for CORS preflight
+export async function OPTIONS() {
+  return createCorsOptionsResponse();
 }

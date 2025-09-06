@@ -1,6 +1,8 @@
 // API route for posts - demonstrating MVC pattern
 import { NextRequest, NextResponse } from 'next/server';
 import { PostController } from '@/controllers/PostController';
+import { createCorsResponse, createCorsOptionsResponse } from '@/utils/cors';
+
 
 const postController = new PostController();
 
@@ -63,7 +65,7 @@ export async function GET(request: NextRequest) {
     const endIndex = startIndex + limit;
     const paginatedPosts = samplePosts.slice(startIndex, endIndex);
 
-    return NextResponse.json({
+    return createCorsResponse({
       success: true,
       data: {
         data: paginatedPosts,
@@ -105,18 +107,18 @@ export async function GET(request: NextRequest) {
     
     // If no response data was captured, return a default response
     if (!responseData) {
-      return NextResponse.json({ 
+      return createCorsResponse({ 
         success: true, 
         data: { data: [], total: 0, page: 1, limit: 10, totalPages: 0 },
         message: 'No data returned from controller'
       });
     }
     
-    return NextResponse.json(responseData);
+    return createCorsResponse(responseData);
   } catch (error) {
-    return NextResponse.json(
+    return createCorsResponse(
       { success: false, error: 'Internal server error' },
-      { status: 500 }
+      500
     );
   }
 }
@@ -130,10 +132,10 @@ export async function POST(request: NextRequest) {
     process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co';
 
   if (!isSupabaseConfigured) {
-    return NextResponse.json({
+    return createCorsResponse({
       success: false,
       error: 'Supabase not configured. Please set up Supabase to create posts.'
-    }, { status: 400 });
+    }, 400);
   }
 
   const mockReq = {
@@ -144,7 +146,7 @@ export async function POST(request: NextRequest) {
 
   const mockRes = {
     status: (code: number) => ({
-      json: (data: any) => NextResponse.json(data, { status: code }),
+      json: (data: any) => createCorsResponse(data, code),
     }),
   } as any;
 
@@ -155,7 +157,7 @@ export async function POST(request: NextRequest) {
       status: (code: number) => ({
         json: (data: any) => {
           responseData = data;
-          return NextResponse.json(data, { status: code });
+          return createCorsResponse(data, code);
         },
       }),
     };
@@ -164,17 +166,23 @@ export async function POST(request: NextRequest) {
     
     // If no response data was captured, return a default response
     if (!responseData) {
-      return NextResponse.json({ 
+      return createCorsResponse({ 
         success: false, 
         error: 'No data returned from controller'
-      }, { status: 500 });
+      }, 500);
     }
     
-    return NextResponse.json(responseData);
+    return createCorsResponse(responseData);
   } catch (error) {
-    return NextResponse.json(
+    return createCorsResponse(
       { success: false, error: 'Internal server error' },
-      { status: 500 }
+      500
     );
   }
+}
+
+// Handle OPTIONS requests for CORS preflight
+export async function OPTIONS() {
+  return createCorsOptionsResponse();
+}
 }

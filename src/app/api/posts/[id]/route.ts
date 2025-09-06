@@ -1,6 +1,8 @@
 // API route for individual post operations
 import { NextRequest, NextResponse } from 'next/server';
 import { PostController } from '@/controllers/PostController';
+import { createCorsResponse, createCorsOptionsResponse } from '@/utils/cors';
+
 
 const postController = new PostController();
 
@@ -63,13 +65,13 @@ export async function GET(
     const post = samplePosts.find(p => p.id === resolvedParams.id);
     
     if (!post) {
-      return NextResponse.json(
+      return createCorsResponse(
         { success: false, error: 'Post not found' },
-        { status: 404 }
+        404
       );
     }
 
-    return NextResponse.json({
+    return createCorsResponse({
       success: true,
       data: post,
       message: 'Sample data - Configure Supabase for real data'
@@ -84,7 +86,7 @@ export async function GET(
 
   const mockRes = {
     status: (code: number) => ({
-      json: (data: any) => NextResponse.json(data, { status: code }),
+      json: (data: any) => createCorsResponse(data, code),
     }),
   } as any;
 
@@ -104,17 +106,17 @@ export async function GET(
     
     // If no response data was captured, return a default response
     if (!responseData) {
-      return NextResponse.json({ 
+      return createCorsResponse({ 
         success: false, 
         error: 'No data returned from controller'
-      }, { status: 500 });
+      }, 500);
     }
     
-    return NextResponse.json(responseData);
+    return createCorsResponse(responseData);
   } catch (error) {
-    return NextResponse.json(
+    return createCorsResponse(
       { success: false, error: 'Internal server error' },
-      { status: 500 }
+      500
     );
   }
 }
@@ -146,7 +148,7 @@ export async function PUT(
 
   const mockRes = {
     status: (code: number) => ({
-      json: (data: any) => NextResponse.json(data, { status: code }),
+      json: (data: any) => createCorsResponse(data, code),
     }),
   } as any;
 
@@ -166,17 +168,17 @@ export async function PUT(
     
     // If no response data was captured, return a default response
     if (!responseData) {
-      return NextResponse.json({ 
+      return createCorsResponse({ 
         success: false, 
         error: 'No data returned from controller'
-      }, { status: 500 });
+      }, 500);
     }
     
-    return NextResponse.json(responseData);
+    return createCorsResponse(responseData);
   } catch (error) {
-    return NextResponse.json(
+    return createCorsResponse(
       { success: false, error: 'Internal server error' },
-      { status: 500 }
+      500
     );
   }
 }
@@ -207,7 +209,7 @@ export async function DELETE(
 
   const mockRes = {
     status: (code: number) => ({
-      json: (data: any) => NextResponse.json(data, { status: code }),
+      json: (data: any) => createCorsResponse(data, code),
     }),
   } as any;
 
@@ -227,17 +229,17 @@ export async function DELETE(
     
     // If no response data was captured, return a default response
     if (!responseData) {
-      return NextResponse.json({ 
+      return createCorsResponse({ 
         success: false, 
         error: 'No data returned from controller'
-      }, { status: 500 });
+      }, 500);
     }
     
-    return NextResponse.json(responseData);
+    return createCorsResponse(responseData);
   } catch (error) {
-    return NextResponse.json(
+    return createCorsResponse(
       { success: false, error: 'Internal server error' },
-      { status: 500 }
+      500
     );
   }
 }

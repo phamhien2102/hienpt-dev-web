@@ -12,6 +12,7 @@ export const Navigation: React.FC = () => {
     { href: '/', label: 'Home', icon: '🏠' },
     { href: '/users', label: 'Users', icon: '👥' },
     { href: '/posts', label: 'Posts', icon: '📝' },
+    { href: '/api-docs', label: 'API Docs', icon: '📚' },
   ];
 
   return (
