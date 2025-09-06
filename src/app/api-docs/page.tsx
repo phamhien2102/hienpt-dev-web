@@ -143,7 +143,7 @@ function QuickStartSection() {
       <h2 className="text-xl font-semibold mb-4">Quick Start</h2>
       <div className="bg-gray-50 p-4 rounded-lg">
         <p className="text-gray-700 mb-2">
-          <strong>Base URL:</strong> <code className="bg-gray-200 px-2 py-1 rounded">http://localhost:3002/api</code>
+          <strong>Base URL:</strong> <code className="bg-gray-200 px-2 py-1 rounded">http://localhost:3000/api</code>
         </p>
         <p className="text-gray-700 mb-2">
           <strong>Authentication:</strong> Currently not required (public API)
@@ -210,10 +210,10 @@ function ExampleUsageSection() {
       <div className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
         <pre className="text-sm">
 {`# Get all users
-curl http://localhost:3002/api/users
+curl http://localhost:3000/api/users
 
 # Create a new user
-curl -X POST http://localhost:3002/api/users \\
+curl -X POST http://localhost:3000/api/users \\
   -H "Content-Type: application/json" \\
   -d '{
     "name": "John Doe",
@@ -222,7 +222,7 @@ curl -X POST http://localhost:3002/api/users \\
   }'
 
 # Get posts with pagination
-curl "http://localhost:3002/api/posts?page=1&limit=5"`}
+curl "http://localhost:3000/api/posts?page=1&limit=5"`}
         </pre>
       </div>
     </div>

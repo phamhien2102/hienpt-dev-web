@@ -134,10 +134,10 @@ export async function PUT(
     process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co';
 
   if (!isSupabaseConfigured) {
-    return NextResponse.json({
+    return createCorsResponse({
       success: false,
       error: 'Supabase not configured. Please set up Supabase to update posts.'
-    }, { status: 400 });
+    }, 400);
   }
 
   const mockReq = {
@@ -195,10 +195,10 @@ export async function DELETE(
     process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co';
 
   if (!isSupabaseConfigured) {
-    return NextResponse.json({
+    return createCorsResponse({
       success: false,
       error: 'Supabase not configured. Please set up Supabase to delete posts.'
-    }, { status: 400 });
+    }, 400);
   }
 
   const mockReq = {
@@ -242,4 +242,9 @@ export async function DELETE(
       500
     );
   }
+}
+
+// Handle OPTIONS requests for CORS preflight
+export async function OPTIONS() {
+  return createCorsOptionsResponse();
 }
