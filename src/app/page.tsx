@@ -1,103 +1,142 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Navigation } from "@/views/components/Navigation";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-gray-50">
+      <Navigation />
+      
+      <main className="container mx-auto px-4 py-12">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              MVC Architecture Demo
+            </h1>
+            <p className="text-xl text-gray-600 mb-8">
+              A comprehensive Model-View-Controller implementation with Next.js, TypeScript, and Tailwind CSS
+            </p>
+          </div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          {/* Architecture Overview */}
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="text-center mb-4">
+                <div className="text-4xl mb-2">📊</div>
+                <h3 className="text-xl font-semibold text-gray-900">Models</h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Data structures and business logic layer. Handles data validation, persistence, and business rules.
+              </p>
+              <ul className="text-sm text-gray-500 space-y-1">
+                <li>• BaseModel with CRUD operations</li>
+                <li>• UserModel with validation</li>
+                <li>• PostModel with search capabilities</li>
+                <li>• TypeScript interfaces for type safety</li>
+              </ul>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="text-center mb-4">
+                <div className="text-4xl mb-2">🎮</div>
+                <h3 className="text-xl font-semibold text-gray-900">Controllers</h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Handles HTTP requests, processes business logic, and coordinates between models and views.
+              </p>
+              <ul className="text-sm text-gray-500 space-y-1">
+                <li>• BaseController with common functionality</li>
+                <li>• UserController for user operations</li>
+                <li>• PostController for post operations</li>
+                <li>• Error handling and validation</li>
+              </ul>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <div className="text-center mb-4">
+                <div className="text-4xl mb-2">🎨</div>
+                <h3 className="text-xl font-semibold text-gray-900">Views</h3>
+              </div>
+              <p className="text-gray-600 mb-4">
+                React components that handle user interface and user interactions.
+              </p>
+              <ul className="text-sm text-gray-500 space-y-1">
+                <li>• Reusable UI components</li>
+                <li>• Form handling and validation</li>
+                <li>• Loading and error states</li>
+                <li>• Responsive design with Tailwind</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Features Section */}
+          <div className="bg-white rounded-lg shadow-md p-8 mb-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Key Features</h2>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Architecture Benefits</h3>
+                <ul className="space-y-2 text-gray-600">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Clear separation of concerns</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Scalable and maintainable code</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Reusable components and services</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Type-safe development with TypeScript</span>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3">Technical Stack</h3>
+                <ul className="space-y-2 text-gray-600">
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span>Next.js 15 with App Router</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span>TypeScript for type safety</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span>Tailwind CSS for styling</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-2">•</span>
+                    <span>React 19 with modern hooks</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* Demo Links */}
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Try the Demo</h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                href="/users"
+                className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors font-medium"
+              >
+                👥 Manage Users
+              </Link>
+              <Link
+                href="/posts"
+                className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors font-medium"
+              >
+                📝 Manage Posts
+              </Link>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
