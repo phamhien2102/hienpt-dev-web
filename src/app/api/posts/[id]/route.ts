@@ -97,7 +97,7 @@ export async function GET(
       status: (code: number) => ({
         json: (data: any) => {
           responseData = data;
-          return NextResponse.json(data, { status: code });
+          return createCorsResponse(data, code);
         },
       }),
     };
@@ -159,7 +159,7 @@ export async function PUT(
       status: (code: number) => ({
         json: (data: any) => {
           responseData = data;
-          return NextResponse.json(data, { status: code });
+          return createCorsResponse(data, code);
         },
       }),
     };
@@ -220,7 +220,7 @@ export async function DELETE(
       status: (code: number) => ({
         json: (data: any) => {
           responseData = data;
-          return NextResponse.json(data, { status: code });
+          return createCorsResponse(data, code);
         },
       }),
     };
