@@ -74,8 +74,8 @@ export async function POST(request: NextRequest) {
       email: user.email,
       role: user.role,
       isActive: user.isActive,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt
+      createdAt: new Date(user.createdAt),
+      updatedAt: new Date(user.updatedAt)
     };
 
     // Generate a simple token (in production, use JWT)
