@@ -116,25 +116,6 @@ export default function Home() {
               </div>
             </div>
           </div>
-
-          {/* Demo Links */}
-          <div className="text-center">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Try the Demo</h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/users"
-                className="bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors font-medium"
-              >
-                👥 Manage Users
-              </Link>
-              <Link
-                href="/posts"
-                className="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors font-medium"
-              >
-                📝 Manage Posts
-              </Link>
-            </div>
-          </div>
         </div>
       </main>
     </div>
