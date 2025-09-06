@@ -53,16 +53,20 @@ src/
 - 🔧 **TypeScript** for type safety
 - 🔧 **Tailwind CSS** for responsive design
 - 🔧 **React 19** with modern hooks
+- 🔧 **Supabase** for backend and database
+- 🔧 **PostgreSQL** with real-time capabilities
 - 🔧 **RESTful API** design
 - 🔧 **Form Validation** and error handling
 - 🔧 **Pagination** support
 - 🔧 **Search** functionality
+- 🔧 **Row Level Security** (RLS)
 
 ## 🛠️ Getting Started
 
 ### Prerequisites
 - Node.js 18+ 
 - npm or yarn
+- Supabase account (free at [supabase.com](https://supabase.com))
 
 ### Installation
 
@@ -77,12 +81,32 @@ cd hienpt-dev-web
 npm install
 ```
 
-3. Run the development server:
+3. Set up Supabase:
+   - Create a new project at [supabase.com](https://supabase.com)
+   - Go to Settings > API to get your project URL and anon key
+   - Copy `.env.example` to `.env.local` and fill in your Supabase credentials:
+   ```bash
+   cp .env.example .env.local
+   ```
+   - Update `.env.local` with your Supabase project details:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+   ```
+
+4. Set up the database:
+   - Go to your Supabase project dashboard
+   - Navigate to SQL Editor
+   - Copy and paste the contents of `supabase-schema.sql`
+   - Run the SQL to create tables and sample data
+
+5. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## 📖 Usage
 
@@ -118,12 +142,17 @@ npm run dev
 
 ### Model Layer
 ```typescript
-// Example: UserModel extends BaseModel
-class UserModel extends BaseModel<User> {
+// Example: SupabaseUserModel extends BaseModel
+class SupabaseUserModel extends BaseModel<User> {
   async createUser(userData: CreateUserForm): Promise<User> {
     // Validation logic
     // Business rules
-    // Data persistence
+    // Supabase database persistence
+    const { data, error } = await supabaseAdmin
+      .from('users')
+      .insert(userData)
+      .select()
+      .single();
   }
 }
 ```
@@ -179,9 +208,41 @@ This project is for educational purposes and demonstrates MVC architecture patte
 4. Add tests if applicable
 5. Submit a pull request
 
+## 🗄️ Database Schema
+
+The project uses PostgreSQL via Supabase with the following tables:
+
+### Users Table
+- `id` (UUID, Primary Key)
+- `name` (VARCHAR)
+- `email` (VARCHAR, Unique)
+- `role` (ENUM: admin, user, moderator)
+- `is_active` (BOOLEAN)
+- `created_at` (TIMESTAMP)
+- `updated_at` (TIMESTAMP)
+
+### Posts Table
+- `id` (UUID, Primary Key)
+- `title` (VARCHAR)
+- `content` (TEXT)
+- `author_id` (UUID, Foreign Key to users)
+- `published` (BOOLEAN)
+- `tags` (TEXT[])
+- `created_at` (TIMESTAMP)
+- `updated_at` (TIMESTAMP)
+
+## 🔐 Security Features
+
+- **Row Level Security (RLS)** enabled on all tables
+- **Environment variables** for sensitive configuration
+- **Input validation** at both client and server levels
+- **Type safety** throughout the application
+- **SQL injection protection** via Supabase client
+
 ## 📚 Learning Resources
 
 - [Next.js Documentation](https://nextjs.org/docs)
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [Supabase Documentation](https://supabase.com/docs)
 - [MVC Pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)

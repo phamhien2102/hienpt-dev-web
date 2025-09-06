@@ -14,15 +14,15 @@ interface Response {
     json: (data: any) => void;
   };
 }
-import { PostModel } from '@/models/PostModel';
+import { SupabasePostModel } from '@/models/SupabasePostModel';
 import { CreatePostForm, UpdatePostForm } from '@/types';
 
 export class PostController extends BaseController {
-  private postModel: PostModel;
+  private postModel: SupabasePostModel;
 
   constructor() {
     super();
-    this.postModel = new PostModel();
+    this.postModel = new SupabasePostModel();
   }
 
   // Get all posts

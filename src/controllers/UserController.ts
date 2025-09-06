@@ -13,15 +13,15 @@ interface Response {
     json: (data: any) => void;
   };
 }
-import { UserModel } from '@/models/UserModel';
+import { SupabaseUserModel } from '@/models/SupabaseUserModel';
 import { CreateUserForm, UpdateUserForm } from '@/types';
 
 export class UserController extends BaseController {
-  private userModel: UserModel;
+  private userModel: SupabaseUserModel;
 
   constructor() {
     super();
-    this.userModel = new UserModel();
+    this.userModel = new SupabaseUserModel();
   }
 
   // Get all users
