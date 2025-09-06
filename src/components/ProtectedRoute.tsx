@@ -61,7 +61,7 @@ export function ProtectedRoute({
         <div className="text-center">
           <div className="bg-red-50 border border-red-200 text-red-600 px-6 py-4 rounded-lg">
             <h2 className="text-xl font-semibold mb-2">Access Denied</h2>
-            <p>You don't have permission to access this page.</p>
+            <p>You don&apos;t have permission to access this page.</p>
           </div>
         </div>
       </div>
