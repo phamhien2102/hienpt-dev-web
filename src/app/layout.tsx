@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MVC Architecture Demo",
-  description: "A comprehensive Model-View-Controller implementation with Next.js, TypeScript, and Tailwind CSS",
+  title: "Hien Pham - Full Stack Developer Portfolio",
+  description: "Portfolio of Hien Pham - Full Stack Developer & Software Engineer. Passionate about building scalable web applications and creating exceptional user experiences.",
 };
 
 export default function RootLayout({

@@ -19,6 +19,8 @@ export interface Post extends BaseEntity {
   authorId: string;
   published: boolean;
   tags: string[];
+  image?: string;
+  imageUrl?: string;
 }
 
 export interface ApiResponse<T> {
@@ -60,6 +62,8 @@ export interface CreatePostForm {
   content: string;
   published: boolean;
   tags: string[];
+  image?: string;
+  imageUrl?: string;
 }
 
 export interface UpdatePostForm extends Partial<CreatePostForm> {

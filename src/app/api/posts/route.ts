@@ -26,6 +26,7 @@ export async function GET(request: NextRequest) {
         authorId: '1',
         published: true,
         tags: ['architecture', 'mvc', 'web-development'],
+        image: 'https://picsum.photos/seed/mvc-architecture/600/400',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       },
@@ -36,6 +37,7 @@ export async function GET(request: NextRequest) {
         authorId: '2',
         published: true,
         tags: ['supabase', 'nextjs', 'database'],
+        image: 'https://picsum.photos/seed/supabase/600/400',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       },
@@ -46,6 +48,7 @@ export async function GET(request: NextRequest) {
         authorId: '3',
         published: false,
         tags: ['typescript', 'programming', 'best-practices'],
+        image: 'https://picsum.photos/seed/typescript/600/400',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       },
@@ -56,6 +59,29 @@ export async function GET(request: NextRequest) {
         authorId: '4',
         published: true,
         tags: ['react', 'hooks', 'frontend'],
+        image: 'https://picsum.photos/seed/react-hooks/600/400',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      {
+        id: '5',
+        title: 'Building Scalable Web Applications',
+        content: 'Learn the principles and patterns for building web applications that can grow with your business needs.',
+        authorId: '1',
+        published: true,
+        tags: ['scalability', 'architecture', 'web-development'],
+        image: 'https://picsum.photos/seed/scalable/600/400',
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+      },
+      {
+        id: '6',
+        title: 'Modern CSS Techniques',
+        content: 'Explore the latest CSS features and techniques for creating beautiful, responsive designs.',
+        authorId: '2',
+        published: true,
+        tags: ['css', 'design', 'frontend'],
+        image: 'https://picsum.photos/seed/css/600/400',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }
