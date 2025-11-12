@@ -1,7 +1,7 @@
-import { Navigation } from "@/views/components/Navigation";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { headers } from "next/headers";
+import { Navigation } from "@/views/components/Navigation";
+import { getRequestBaseUrl } from "@/utils/url";
 
 interface Post {
   id: string;
@@ -17,17 +17,7 @@ interface Post {
 }
 
 async function fetchPost(postId: string): Promise<Post | null> {
-  const headersList = headers();
-  const baseUrl =
-    process.env.NEXT_PUBLIC_SITE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
-    (() => {
-      const protocol = headersList.get("x-forwarded-proto") ?? "http";
-      const host = headersList.get("x-forwarded-host") ?? headersList.get("host");
-      return host ? `${protocol}://${host}` : null;
-    })() ||
-    "http://localhost:3000";
-
+  const baseUrl = await getRequestBaseUrl();
   const response = await fetch(`${baseUrl}/api/posts/${postId}`, {
     cache: "no-store",
   });
@@ -43,11 +33,7 @@ async function fetchPost(postId: string): Promise<Post | null> {
   const payload = await response.json();
   const post: Post | undefined = payload?.data;
 
-  if (!post) {
-    return null;
-  }
-
-  return post;
+  return post ?? null;
 }
 
 const formatDate = (date?: string) => {
