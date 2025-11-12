@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -36,12 +37,12 @@ export default function AdminPage() {
                 <div className="text-sm text-gray-600">Total users</div>
               </div>
               <div className="mt-4">
-                <a
+                <Link
                   href="/users"
                   className="text-blue-600 hover:text-blue-700 text-sm font-medium"
                 >
                   View all users →
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -61,12 +62,12 @@ export default function AdminPage() {
                 <div className="text-sm text-gray-600">Total posts</div>
               </div>
               <div className="mt-4">
-                <a
+                <Link
                   href="/posts"
                   className="text-blue-600 hover:text-blue-700 text-sm font-medium"
                 >
                   View all posts →
-                </a>
+                </Link>
               </div>
             </div>
 
@@ -86,12 +87,12 @@ export default function AdminPage() {
                 <div className="text-sm text-gray-600">API endpoints</div>
               </div>
               <div className="mt-4">
-                <a
+                <Link
                   href="/api-docs"
                   className="text-blue-600 hover:text-blue-700 text-sm font-medium"
                 >
                   View API docs →
-                </a>
+                </Link>
               </div>
             </div>
 
