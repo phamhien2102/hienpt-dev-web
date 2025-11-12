@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 interface Post {
   id: string;
@@ -40,8 +40,8 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ limit = 6 }) => {
           setPosts([]);
         }
       } catch (err) {
-        console.error('Error fetching posts:', err);
-        setError('Failed to load blog posts');
+        console.error("Error fetching posts:", err);
+        setError("Failed to load blog posts");
       } finally {
         setLoading(false);
       }
@@ -52,16 +52,16 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ limit = 6 }) => {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
   const truncateContent = (content: string, maxLength: number = 150) => {
     if (content.length <= maxLength) return content;
-    return content.substring(0, maxLength).trim() + '...';
+    return content.substring(0, maxLength).trim() + "...";
   };
 
   if (loading) {
@@ -106,10 +106,10 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ limit = 6 }) => {
 
   const formatShortDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
     });
   };
 
@@ -142,7 +142,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ limit = 6 }) => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
-                    target.style.display = 'none';
+                    target.style.display = "none";
                   }}
                 />
                 
@@ -205,7 +205,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ limit = 6 }) => {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
+                        target.style.display = "none";
                       }}
                     />
                     
@@ -260,7 +260,7 @@ export const BlogSection: React.FC<BlogSectionProps> = ({ limit = 6 }) => {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
+                        target.style.display = "none";
                       }}
                     />
                     

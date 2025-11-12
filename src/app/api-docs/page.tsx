@@ -1,14 +1,14 @@
-'use client';
+"use client";
 
-import { swaggerSpec } from '@/lib/swagger';
-import { useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
+import { swaggerSpec } from "@/lib/swagger";
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
 // Import Swagger UI CSS
-import 'swagger-ui-react/swagger-ui.css';
+import "swagger-ui-react/swagger-ui.css";
 
 // Dynamic import with no SSR
-const DynamicSwaggerUI = dynamic(() => import('swagger-ui-react'), {
+const DynamicSwaggerUI = dynamic(() => import("swagger-ui-react"), {
   ssr: false,
   loading: () => <LoadingSpinner message="Loading Swagger UI..." />,
 });
@@ -20,19 +20,19 @@ function useConsoleSuppression() {
     const originalConsoleError = console.error;
     
     const suppressedMessages = [
-      'UNSAFE_componentWillReceiveProps',
-      'componentWillReceiveProps',
-      'ModelCollapse',
-      'OperationContainer',
-      'Using UNSAFE_componentWillReceiveProps',
-      'Move data fetching code',
-      'refactor your code to use memoization',
-      'strict mode is not recommended'
+      "UNSAFE_componentWillReceiveProps",
+      "componentWillReceiveProps",
+      "ModelCollapse",
+      "OperationContainer",
+      "Using UNSAFE_componentWillReceiveProps",
+      "Move data fetching code",
+      "refactor your code to use memoization",
+      "strict mode is not recommended"
     ];
     
     console.warn = (...args) => {
       const message = args[0];
-      if (typeof message === 'string' && suppressedMessages.some(msg => message.includes(msg))) {
+      if (typeof message === "string" && suppressedMessages.some(msg => message.includes(msg))) {
         return;
       }
       originalConsoleWarn(...args);
@@ -40,7 +40,7 @@ function useConsoleSuppression() {
 
     console.error = (...args) => {
       const message = args[0];
-      if (typeof message === 'string' && suppressedMessages.some(msg => message.includes(msg))) {
+      if (typeof message === "string" && suppressedMessages.some(msg => message.includes(msg))) {
         return;
       }
       originalConsoleError(...args);
@@ -122,10 +122,10 @@ function ApiHeader() {
       </p>
       <div className="mt-4 flex flex-wrap gap-2">
         {[
-          { label: 'Next.js 15', color: 'bg-blue-500' },
-          { label: 'Supabase', color: 'bg-green-500' },
-          { label: 'TypeScript', color: 'bg-purple-500' },
-          { label: 'MVC Pattern', color: 'bg-orange-500' }
+          { label: "Next.js 15", color: "bg-blue-500" },
+          { label: "Supabase", color: "bg-green-500" },
+          { label: "TypeScript", color: "bg-purple-500" },
+          { label: "MVC Pattern", color: "bg-orange-500" }
         ].map(({ label, color }) => (
           <span key={label} className={`${color} text-white px-3 py-1 rounded-full text-sm`}>
             {label}
@@ -160,25 +160,25 @@ function QuickStartSection() {
 function EndpointsSection() {
   const endpoints = [
     {
-      title: 'Users API',
-      color: 'blue',
+      title: "Users API",
+      color: "blue",
       endpoints: [
-        'GET /users - List all users',
-        'POST /users - Create user',
-        'GET /users/{id} - Get user by ID',
-        'PUT /users/{id} - Update user',
-        'DELETE /users/{id} - Delete user'
+        "GET /users - List all users",
+        "POST /users - Create user",
+        "GET /users/{id} - Get user by ID",
+        "PUT /users/{id} - Update user",
+        "DELETE /users/{id} - Delete user"
       ]
     },
     {
-      title: 'Posts API',
-      color: 'green',
+      title: "Posts API",
+      color: "green",
       endpoints: [
-        'GET /posts - List all posts',
-        'POST /posts - Create post',
-        'GET /posts/{id} - Get post by ID',
-        'PUT /posts/{id} - Update post',
-        'DELETE /posts/{id} - Delete post'
+        "GET /posts - List all posts",
+        "POST /posts - Create post",
+        "GET /posts/{id} - Get post by ID",
+        "PUT /posts/{id} - Update post",
+        "DELETE /posts/{id} - Delete post"
       ]
     }
   ];
@@ -258,7 +258,7 @@ export default function ApiDocsPage() {
   const isClient = useClientSide();
 
   // Prevent SSR
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return null;
   }
 

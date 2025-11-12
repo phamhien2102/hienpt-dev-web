@@ -1,5 +1,5 @@
 // Base controller class that all other controllers extend
-import { ApiResponse } from '@/types';
+import { ApiResponse } from "@/types";
 
 // Mock Express types for Next.js compatibility
 interface Request {
@@ -37,7 +37,7 @@ export abstract class BaseController {
   // Validation helper
   protected validateRequired(data: any, fields: string[]): string | null {
     for (const field of fields) {
-      if (data[field] === undefined || data[field] === null || data[field] === '') {
+      if (data[field] === undefined || data[field] === null || data[field] === "") {
         return `${field} is required`;
       }
     }
@@ -55,7 +55,7 @@ export abstract class BaseController {
   protected async handleAsync<T>(
     operation: () => Promise<T>,
     res: Response,
-    errorMessage: string = 'An error occurred'
+    errorMessage: string = "An error occurred"
   ): Promise<void> {
     try {
       const result = await operation();

@@ -9,7 +9,7 @@ export interface BaseEntity {
 export interface User extends BaseEntity {
   name: string;
   email: string;
-  role: 'admin' | 'user' | 'moderator';
+  role: "admin" | "user" | "moderator";
   isActive: boolean;
 }
 
@@ -34,7 +34,7 @@ export interface PaginationParams {
   page: number;
   limit: number;
   sortBy?: string;
-  sortOrder?: 'asc' | 'desc';
+  sortOrder?: "asc" | "desc";
 }
 
 export interface PaginatedResponse<T> extends ApiResponse<T[]> {
@@ -50,7 +50,7 @@ export interface PaginatedResponse<T> extends ApiResponse<T[]> {
 export interface CreateUserForm {
   name: string;
   email: string;
-  role: 'admin' | 'user' | 'moderator';
+  role: "admin" | "user" | "moderator";
 }
 
 export interface UpdateUserForm extends Partial<CreateUserForm> {
@@ -88,7 +88,7 @@ export interface AuthUser {
   id: string;
   name: string;
   email: string;
-  role: 'admin' | 'moderator' | 'user';
+  role: "admin" | "moderator" | "user";
   isActive: boolean;
 }
 

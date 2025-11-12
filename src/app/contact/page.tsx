@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Navigation } from '@/views/components/Navigation';
-import Link from 'next/link';
+import { useState } from "react";
+import { Navigation } from "@/views/components/Navigation";
+import Link from "next/link";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
+    name: "",
+    email: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,19 +23,19 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
+    setSubmitStatus("idle");
 
     try {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Here you would typically send the data to your API
-      console.log('Form submitted:', formData);
+      console.log("Form submitted:", formData);
       
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '' });
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "" });
     } catch (error) {
-      setSubmitStatus('error');
+      setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
     }
@@ -57,10 +57,10 @@ export default function ContactPage() {
           {/* Circular Elements */}
           <div className="flex justify-center items-center gap-6 md:gap-8 mb-16">
             {[
-              { icon: '↑', bg: 'from-blue-500 to-purple-600' },
-              { icon: '[ ]', bg: 'from-pink-500 to-rose-600' },
-              { icon: '↗', bg: 'from-cyan-400 to-blue-500' },
-              { icon: '*', bg: 'from-yellow-400 to-orange-500' },
+              { icon: "↑", bg: "from-blue-500 to-purple-600" },
+              { icon: "[ ]", bg: "from-pink-500 to-rose-600" },
+              { icon: "↗", bg: "from-cyan-400 to-blue-500" },
+              { icon: "*", bg: "from-yellow-400 to-orange-500" },
             ].map((item, index) => (
               <div
                 key={index}
@@ -80,8 +80,8 @@ export default function ContactPage() {
             <div 
               className="absolute inset-0 bg-cover bg-center"
               style={{
-                backgroundImage: 'url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80)',
-                filter: 'blur(2px)',
+                backgroundImage: "url(https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&q=80)",
+                filter: "blur(2px)",
               }}
             >
               <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-800/70 to-gray-900/80"></div>
@@ -126,17 +126,17 @@ export default function ContactPage() {
                       disabled={isSubmitting}
                       className="px-8 py-4 bg-black text-white rounded-2xl font-semibold hover:bg-gray-900 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                     >
-                      {isSubmitting ? 'Submitting...' : 'Submit'}
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
                   </div>
 
                   {/* Success/Error Messages */}
-                  {submitStatus === 'success' && (
+                  {submitStatus === "success" && (
                     <div className="text-center text-green-400 font-medium">
-                      Thank you! We'll be in touch soon.
+                      {"Thank you! We'll be in touch soon."}
                     </div>
                   )}
-                  {submitStatus === 'error' && (
+                  {submitStatus === "error" && (
                     <div className="text-center text-red-400 font-medium">
                       Something went wrong. Please try again.
                     </div>

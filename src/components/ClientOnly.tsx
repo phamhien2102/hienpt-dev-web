@@ -1,7 +1,7 @@
 // Client-only wrapper to prevent hydration mismatches
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 interface ClientOnlyProps {
   children: React.ReactNode;

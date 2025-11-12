@@ -1,5 +1,5 @@
 // Base model class that all other models extend
-import { BaseEntity } from '@/types';
+import { BaseEntity } from "@/types";
 
 export abstract class BaseModel<T extends BaseEntity> {
   protected data: T[] = [];
@@ -11,7 +11,7 @@ export abstract class BaseModel<T extends BaseEntity> {
   }
 
   // Create a new entity
-  async create(data: Omit<T, 'id' | 'createdAt' | 'updatedAt'>): Promise<T> {
+  async create(data: Omit<T, "id" | "createdAt" | "updatedAt">): Promise<T> {
     const now = new Date();
     const entity: T = {
       ...data,
@@ -35,7 +35,7 @@ export abstract class BaseModel<T extends BaseEntity> {
   }
 
   // Update entity by ID
-  async update(id: string, data: Partial<Omit<T, 'id' | 'createdAt' | 'updatedAt'>>): Promise<T | null> {
+  async update(id: string, data: Partial<Omit<T, "id" | "createdAt" | "updatedAt">>): Promise<T | null> {
     const index = this.data.findIndex(item => item.id === id);
     if (index === -1) return null;
 

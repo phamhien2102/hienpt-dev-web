@@ -1,11 +1,11 @@
 // User view components
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { User, CreateUserForm, UpdateUserForm } from '@/types';
-import { UserService } from '@/services/UserService';
-import { BaseView, LoadingSpinner, ErrorMessage } from './BaseView';
-import { formatDate } from '@/utils/dateUtils';
+import React, { useState, useEffect } from "react";
+import { User, CreateUserForm, UpdateUserForm } from "@/types";
+import { UserService } from "@/services/UserService";
+import { BaseView, LoadingSpinner, ErrorMessage } from "./BaseView";
+import { formatDate } from "@/utils/dateUtils";
 
 interface UserListProps {
   onUserSelect?: (user: User) => void;
@@ -31,10 +31,10 @@ export const UserList: React.FC<UserListProps> = ({ onUserSelect }) => {
         setTotalPages(response.data.pagination?.totalPages || 1);
         setPage(pageNum);
       } else {
-        setError(response.error || 'Failed to fetch users');
+        setError(response.error || "Failed to fetch users");
       }
     } catch (err) {
-      setError('An unexpected error occurred');
+      setError("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -81,18 +81,18 @@ export const UserList: React.FC<UserListProps> = ({ onUserSelect }) => {
                 <h3 className="font-semibold text-lg">{user.name}</h3>
                 <p className="text-gray-600">{user.email}</p>
                 <span className={`inline-block px-2 py-1 text-xs rounded-full ${
-                  user.role === 'admin' ? 'bg-red-100 text-red-800' :
-                  user.role === 'moderator' ? 'bg-yellow-100 text-yellow-800' :
-                  'bg-green-100 text-green-800'
+                  user.role === "admin" ? "bg-red-100 text-red-800" :
+                  user.role === "moderator" ? "bg-yellow-100 text-yellow-800" :
+                  "bg-green-100 text-green-800"
                 }`}>
                   {user.role}
                 </span>
               </div>
               <div className="text-right">
                 <span className={`inline-block px-2 py-1 text-xs rounded-full ${
-                  user.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                  user.isActive ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"
                 }`}>
-                  {user.isActive ? 'Active' : 'Inactive'}
+                  {user.isActive ? "Active" : "Inactive"}
                 </span>
                 <p className="text-sm text-gray-500 mt-1" suppressHydrationWarning>
                   Created: {formatDate(user.createdAt)}
@@ -136,9 +136,9 @@ interface UserFormProps {
 
 export const UserForm: React.FC<UserFormProps> = ({ user, onSubmit, onCancel, loading = false }) => {
   const [formData, setFormData] = useState<CreateUserForm>({
-    name: user?.name || '',
-    email: user?.email || '',
-    role: user?.role || 'user',
+    name: user?.name || "",
+    email: user?.email || "",
+    role: user?.role || "user",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -157,7 +157,7 @@ export const UserForm: React.FC<UserFormProps> = ({ user, onSubmit, onCancel, lo
   return (
     <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">
-        {user ? 'Edit User' : 'Create User'}
+        {user ? "Edit User" : "Create User"}
       </h2>
       
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -214,7 +214,7 @@ export const UserForm: React.FC<UserFormProps> = ({ user, onSubmit, onCancel, lo
             disabled={loading}
             className="flex-1 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? <LoadingSpinner size="sm" /> : (user ? 'Update' : 'Create')}
+            {loading ? <LoadingSpinner size="sm" /> : (user ? "Update" : "Create")}
           </button>
           <button
             type="button"

@@ -1,7 +1,7 @@
 // Base view component with common functionality
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 
 interface BaseViewProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ interface BaseViewProps {
 
 export const BaseView: React.FC<BaseViewProps> = ({
   children,
-  className = '',
+  className = "",
   loading = false,
   error = null,
 }) => {
@@ -49,11 +49,11 @@ export const BaseView: React.FC<BaseViewProps> = ({
 };
 
 // Loading spinner component
-export const LoadingSpinner: React.FC<{ size?: 'sm' | 'md' | 'lg' }> = ({ size = 'md' }) => {
+export const LoadingSpinner: React.FC<{ size?: "sm" | "md" | "lg" }> = ({ size = "md" }) => {
   const sizeClasses = {
-    sm: 'h-4 w-4',
-    md: 'h-8 w-8',
-    lg: 'h-12 w-12',
+    sm: "h-4 w-4",
+    md: "h-8 w-8",
+    lg: "h-12 w-12",
   };
 
   return (

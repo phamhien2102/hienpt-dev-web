@@ -1,11 +1,11 @@
 // Post view components
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import { Post, CreatePostForm, UpdatePostForm } from '@/types';
-import { PostService } from '@/services/PostService';
-import { BaseView, LoadingSpinner, ErrorMessage } from './BaseView';
-import { formatDate } from '@/utils/dateUtils';
+import React, { useState, useEffect } from "react";
+import { Post, CreatePostForm, UpdatePostForm } from "@/types";
+import { PostService } from "@/services/PostService";
+import { BaseView, LoadingSpinner, ErrorMessage } from "./BaseView";
+import { formatDate } from "@/utils/dateUtils";
 
 interface PostListProps {
   onPostSelect?: (post: Post) => void;
@@ -40,10 +40,10 @@ export const PostList: React.FC<PostListProps> = ({ onPostSelect, authorId }) =>
         }
         setPage(pageNum);
       } else {
-        setError(response.error || 'Failed to fetch posts');
+        setError(response.error || "Failed to fetch posts");
       }
     } catch (err) {
-      setError('An unexpected error occurred');
+      setError("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -77,7 +77,7 @@ export const PostList: React.FC<PostListProps> = ({ onPostSelect, authorId }) =>
   return (
     <div className="p-4">
       <h2 className="text-2xl font-bold mb-4">
-        {authorId ? 'User Posts' : 'Posts'}
+        {authorId ? "User Posts" : "Posts"}
       </h2>
       
       <div className="grid gap-4">
@@ -91,9 +91,9 @@ export const PostList: React.FC<PostListProps> = ({ onPostSelect, authorId }) =>
               <h3 className="font-semibold text-lg">{post.title}</h3>
               <div className="flex space-x-2">
                 <span className={`inline-block px-2 py-1 text-xs rounded-full ${
-                  post.published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+                  post.published ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"
                 }`}>
-                  {post.published ? 'Published' : 'Draft'}
+                  {post.published ? "Published" : "Draft"}
                 </span>
               </div>
             </div>
@@ -156,13 +156,13 @@ interface PostFormProps {
 
 export const PostForm: React.FC<PostFormProps> = ({ post, onSubmit, onCancel, loading = false }) => {
   const [formData, setFormData] = useState<CreatePostForm>({
-    title: post?.title || '',
-    content: post?.content || '',
+    title: post?.title || "",
+    content: post?.content || "",
     published: post?.published || false,
     tags: post?.tags || [],
   });
 
-  const [tagInput, setTagInput] = useState('');
+  const [tagInput, setTagInput] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -173,7 +173,7 @@ export const PostForm: React.FC<PostFormProps> = ({ post, onSubmit, onCancel, lo
     const { name, value, type } = e.target;
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
+      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
     }));
   };
 
@@ -183,7 +183,7 @@ export const PostForm: React.FC<PostFormProps> = ({ post, onSubmit, onCancel, lo
         ...prev,
         tags: [...prev.tags, tagInput.trim()],
       }));
-      setTagInput('');
+      setTagInput("");
     }
   };
 
@@ -197,7 +197,7 @@ export const PostForm: React.FC<PostFormProps> = ({ post, onSubmit, onCancel, lo
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-4">
-        {post ? 'Edit Post' : 'Create Post'}
+        {post ? "Edit Post" : "Create Post"}
       </h2>
       
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -255,7 +255,7 @@ export const PostForm: React.FC<PostFormProps> = ({ post, onSubmit, onCancel, lo
               onChange={(e) => setTagInput(e.target.value)}
               placeholder="Add a tag"
               className="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddTag())}
+              onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), handleAddTag())}
             />
             <button
               type="button"
@@ -290,7 +290,7 @@ export const PostForm: React.FC<PostFormProps> = ({ post, onSubmit, onCancel, lo
             disabled={loading}
             className="flex-1 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? <LoadingSpinner size="sm" /> : (post ? 'Update' : 'Create')}
+            {loading ? <LoadingSpinner size="sm" /> : (post ? "Update" : "Create")}
           </button>
           <button
             type="button"

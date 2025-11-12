@@ -1,15 +1,15 @@
 // Post service for handling post-related API calls
-import { BaseService } from './BaseService';
-import { Post, CreatePostForm, UpdatePostForm, PaginatedResponse } from '@/types';
+import { BaseService } from "./BaseService";
+import { Post, CreatePostForm, UpdatePostForm, PaginatedResponse } from "@/types";
 
 export class PostService extends BaseService {
-  constructor(baseUrl: string = '/api/posts') {
+  constructor(baseUrl: string = "/api/posts") {
     super(baseUrl);
   }
 
   // Get all posts with pagination
   async getPosts(page: number = 1, limit: number = 10): Promise<{ success: boolean; data?: PaginatedResponse<Post>; error?: string }> {
-    return this.get<PaginatedResponse<Post>>('', { page: page.toString(), limit: limit.toString() });
+    return this.get<PaginatedResponse<Post>>("", { page: page.toString(), limit: limit.toString() });
   }
 
   // Get post by ID
@@ -19,7 +19,7 @@ export class PostService extends BaseService {
 
   // Create new post
   async createPost(postData: CreatePostForm, authorId: string): Promise<{ success: boolean; data?: Post; error?: string }> {
-    return this.post<Post>('', { ...postData, authorId });
+    return this.post<Post>("", { ...postData, authorId });
   }
 
   // Update post
@@ -39,7 +39,7 @@ export class PostService extends BaseService {
 
   // Get published posts
   async getPublishedPosts(): Promise<{ success: boolean; data?: Post[]; error?: string }> {
-    return this.get<Post[]>('/published');
+    return this.get<Post[]>("/published");
   }
 
   // Get posts by tag
@@ -49,7 +49,7 @@ export class PostService extends BaseService {
 
   // Search posts
   async searchPosts(query: string): Promise<{ success: boolean; data?: Post[]; error?: string }> {
-    return this.get<Post[]>('/search', { q: query });
+    return this.get<Post[]>("/search", { q: query });
   }
 
   // Publish post
@@ -64,6 +64,6 @@ export class PostService extends BaseService {
 
   // Get post statistics
   async getPostStatistics(): Promise<{ success: boolean; data?: any; error?: string }> {
-    return this.get('/statistics');
+    return this.get("/statistics");
   }
 }

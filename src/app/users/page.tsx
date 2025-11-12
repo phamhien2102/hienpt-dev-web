@@ -1,10 +1,10 @@
 // Users page demonstrating MVC pattern
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { UserList, UserForm } from '@/views/components/UserView';
-import { User, CreateUserForm, UpdateUserForm } from '@/types';
-import { UserService } from '@/services/UserService';
+import React, { useState } from "react";
+import { UserList, UserForm } from "@/views/components/UserView";
+import { User, CreateUserForm, UpdateUserForm } from "@/types";
+import { UserService } from "@/services/UserService";
 
 export default function UsersPage() {
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
@@ -43,10 +43,10 @@ export default function UsersPage() {
         // Refresh the user list would happen here
         window.location.reload(); // Simple refresh for demo
       } else {
-        alert(response.error || 'An error occurred');
+        alert(response.error || "An error occurred");
       }
     } catch (error) {
-      alert('An unexpected error occurred');
+      alert("An unexpected error occurred");
     } finally {
       setFormLoading(false);
     }

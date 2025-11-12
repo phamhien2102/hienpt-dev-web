@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
-import { Navigation } from '@/views/components/Navigation';
+import { useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { Navigation } from "@/views/components/Navigation";
 
 interface Post {
   id: string;
@@ -25,7 +25,7 @@ export default function PostsPage() {
   const [totalPages, setTotalPages] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [allTags, setAllTags] = useState<string[]>([]);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [filteredCount, setFilteredCount] = useState(0);
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -33,8 +33,8 @@ export default function PostsPage() {
   const [featuredArticleIndex, setFeaturedArticleIndex] = useState(0);
 
   const focusSearchInput = () => {
-    if (typeof window === 'undefined') return;
-    const selector = window.matchMedia('(min-width: 768px)').matches
+    if (typeof window === "undefined") return;
+    const selector = window.matchMedia("(min-width: 768px)").matches
       ? 'input[data-search-input="desktop"]'
       : 'input[data-search-input="mobile"]';
     const input = document.querySelector(selector) as HTMLInputElement | null;
@@ -84,8 +84,8 @@ export default function PostsPage() {
           setAllPosts([]);
         }
       } catch (err) {
-        console.error('Error fetching posts:', err);
-        setError('Failed to load blog posts');
+        console.error("Error fetching posts:", err);
+        setError("Failed to load blog posts");
       } finally {
         setLoading(false);
       }
@@ -128,16 +128,16 @@ export default function PostsPage() {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   };
 
   const truncateContent = (content: string, maxLength: number = 120) => {
     if (content.length <= maxLength) return content;
-    return content.substring(0, maxLength).trim() + '...';
+    return content.substring(0, maxLength).trim() + "...";
   };
 
   if (loading) {
@@ -206,7 +206,7 @@ export default function PostsPage() {
                             <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 text-white font-semibold">
                               {featuredPost.authorId
                                 ? featuredPost.authorId.charAt(0).toUpperCase()
-                                : 'A'}
+                                : "A"}
                             </div>
                             <div>
                               <p className="text-sm font-semibold text-gray-900">Author</p>
@@ -259,9 +259,9 @@ export default function PostsPage() {
                         <div className="relative z-10 flex flex-col gap-6 border-t border-gray-200 px-10 py-10 lg:flex-row lg:items-center lg:justify-between">
                           <div className="flex items-center gap-6">
                             <div className="text-4xl font-black text-gray-900 md:text-5xl">
-                              {String(featuredArticleIndex + 1).padStart(2, '0')}
+                              {String(featuredArticleIndex + 1).padStart(2, "0")}
                               <span className="ml-2 text-2xl font-bold text-gray-300">
-                                /{String(totalFeatured).padStart(2, '0')}
+                                /{String(totalFeatured).padStart(2, "0")}
                               </span>
                             </div>
                             <div className="flex items-center gap-3 text-gray-500">
@@ -297,7 +297,7 @@ export default function PostsPage() {
                                 <span
                                   key={idx}
                                   className={`h-2 w-2 rounded-full transition-colors ${
-                                    idx === featuredArticleIndex ? 'bg-gray-900' : 'bg-gray-300'
+                                    idx === featuredArticleIndex ? "bg-gray-900" : "bg-gray-300"
                                   }`}
                                 ></span>
                               ))}
@@ -349,7 +349,7 @@ export default function PostsPage() {
                         <Link key={post.id} href={`/posts/${post.id}`}>
                           <div
                             className={`group flex items-center gap-4 rounded-2xl border border-white/5 px-4 py-4 transition-colors ${
-                              isHighlighted ? 'bg-white/8' : 'bg-white/[0.02]'
+                              isHighlighted ? "bg-white/8" : "bg-white/[0.02]"
                             } hover:bg-white/10`}
                           >
                             <div className="h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl bg-white/10">
@@ -359,7 +359,7 @@ export default function PostsPage() {
                                 className="h-full w-full object-cover"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
-                                  target.style.display = 'none';
+                                  target.style.display = "none";
                                 }}
                               />
                             </div>
@@ -448,9 +448,9 @@ export default function PostsPage() {
 
                   <div className="hidden md:block absolute -left-[19rem] top-1/2 -translate-y-1/2 w-[18rem]">
                     <div
-                      className={`transform origin-right transition-all duration-200 ${showSearchBar ? 'opacity-100 translate-x-0 pointer-events-auto' : 'opacity-0 translate-x-2 pointer-events-none'
+                      className={`transform origin-right transition-all duration-200 ${showSearchBar ? "opacity-100 translate-x-0 pointer-events-auto" : "opacity-0 translate-x-2 pointer-events-none"
                         }`}
-                      style={{ willChange: 'transform, opacity' }}
+                      style={{ willChange: "transform, opacity" }}
                     >
                       <div className="relative bg-white border-2 border-gray-200 rounded-full shadow-sm">
                         <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-gray-400 pointer-events-none">
@@ -491,7 +491,7 @@ export default function PostsPage() {
                         {searchQuery && (
                           <button
                             onClick={() => {
-                              setSearchQuery('');
+                              setSearchQuery("");
                               setPage(1);
                               setShowSearchBar(false);
                             }}
@@ -546,8 +546,8 @@ export default function PostsPage() {
                                 setShowFilterPopup(false);
                               }}
                               className={`w-full text-left px-4 py-2.5 text-sm font-medium transition-colors flex items-center justify-between ${selectedCategory === null
-                                  ? 'bg-gray-100 text-gray-900'
-                                  : 'text-gray-700 hover:bg-gray-50'
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700 hover:bg-gray-50"
                                 }`}
                             >
                               <span>All</span>
@@ -566,8 +566,8 @@ export default function PostsPage() {
                                   setShowFilterPopup(false);
                                 }}
                                 className={`w-full text-left px-4 py-2.5 text-sm font-medium transition-colors flex items-center justify-between ${selectedCategory === tag
-                                    ? 'bg-gray-100 text-gray-900'
-                                    : 'text-gray-700 hover:bg-gray-50'
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700 hover:bg-gray-50"
                                   }`}
                               >
                                 <span>{tag}</span>
@@ -629,7 +629,7 @@ export default function PostsPage() {
                   {searchQuery && (
                     <button
                       onClick={() => {
-                        setSearchQuery('');
+                        setSearchQuery("");
                         setPage(1);
                         setShowSearchBar(false);
                       }}
@@ -650,7 +650,9 @@ export default function PostsPage() {
                 <div className="flex items-center gap-3 text-sm text-gray-600 animate-in fade-in slide-in-from-top-1 duration-300">
                   <div className="flex items-center gap-2">
                     {searchQuery && (
-                      <span>Found {filteredCount} {filteredCount === 1 ? 'article' : 'articles'} for "{searchQuery}"</span>
+                      <span>
+                        Found {filteredCount} {filteredCount === 1 ? "article" : "articles"} for &quot;{searchQuery}&quot;
+                      </span>
                     )}
                     {searchQuery && selectedCategory && <span> • </span>}
                     {selectedCategory && (
@@ -699,7 +701,7 @@ export default function PostsPage() {
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.style.display = 'none';
+                            target.style.display = "none";
                           }}
                         />
 

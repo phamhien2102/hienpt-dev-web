@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { Navigation } from "@/views/components/Navigation";
@@ -87,7 +87,7 @@ export default function Portfolio() {
               👨‍💻
             </div>
             <h1 className="text-5xl font-bold text-gray-900 mb-4">
-              Hi, I'm Hien Pham
+              {"Hi, I'm Hien Pham"}
             </h1>
             <p className="text-2xl text-gray-600 mb-6">
               Full Stack Developer & Software Engineer
@@ -120,7 +120,7 @@ export default function Portfolio() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6">About Me</h2>
             <div className="prose prose-lg text-gray-600 space-y-4">
               <p>
-                I'm a dedicated full-stack developer with a passion for creating
+                {"I'm a dedicated full-stack developer with a passion for creating "}
                 innovative web solutions. With expertise in modern JavaScript
                 frameworks and cloud technologies, I build applications that are
                 both performant and user-friendly.
@@ -132,7 +132,7 @@ export default function Portfolio() {
                 difference.
               </p>
               <p>
-                When I'm not coding, you can find me exploring new technologies,
+                {"When I'm not coding, you can find me exploring new technologies, "}
                 contributing to open-source projects, or sharing knowledge with
                 the developer community.
               </p>
@@ -248,7 +248,7 @@ export default function Portfolio() {
           <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl shadow-lg p-8 text-white">
             <h2 className="text-3xl font-bold mb-6">Get In Touch</h2>
             <p className="text-lg mb-8 text-blue-100">
-              I'm always open to discussing new projects, creative ideas, or
+              {"I'm always open to discussing new projects, creative ideas, or "}
               opportunities to be part of your vision. Feel free to reach out!
             </p>
             <div className="grid md:grid-cols-3 gap-6">

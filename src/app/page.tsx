@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { Navigation } from "@/views/components/Navigation";
@@ -12,8 +12,8 @@ export default function Home() {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   return (
@@ -34,8 +34,8 @@ export default function Home() {
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-5">
             <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, rgb(0,0,0) 1px, transparent 0)`,
-              backgroundSize: '40px 40px'
+              backgroundImage: "radial-gradient(circle at 2px 2px, rgb(0,0,0) 1px, transparent 0)",
+              backgroundSize: "40px 40px"
             }}></div>
           </div>
 
@@ -54,7 +54,7 @@ export default function Home() {
               {/* Main Heading with Animation */}
               <div className="text-center mb-8">
                 <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-gray-900 mb-6 leading-tight">
-                  <span className="block">Hi, I'm</span>
+                  <span className="block">{"Hi, I'm"}</span>
                   <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
                     Hien Pham
                   </span>
@@ -94,9 +94,9 @@ export default function Home() {
               {/* Stats or Quick Links */}
               <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
                 {[
-                  { label: 'Articles', value: '460+', link: '/posts' },
-                  { label: 'Projects', value: '50+', link: '/portfolio' },
-                  { label: 'Experience', value: '5+', link: '/portfolio' },
+                  { label: "Articles", value: "460+", link: "/posts" },
+                  { label: "Projects", value: "50+", link: "/portfolio" },
+                  { label: "Experience", value: "5+", link: "/portfolio" },
                 ].map((stat, index) => (
                   <Link
                     key={index}
@@ -147,7 +147,9 @@ export default function Home() {
                   </h2>
                   <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
                     <p>
-                      I'm a dedicated <strong className="text-gray-900">full-stack developer</strong> with a passion for creating
+                      {"I'm a dedicated "}
+                      <strong className="text-gray-900">full-stack developer</strong>
+                      {" with a passion for creating "}
                       innovative web solutions. With expertise in modern JavaScript
                       frameworks and cloud technologies, I build applications that are
                       both performant and user-friendly.
@@ -188,32 +190,32 @@ export default function Home() {
           {/* Background Pattern */}
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, rgb(255,255,255) 1px, transparent 0)`,
-              backgroundSize: '50px 50px'
+              backgroundImage: "radial-gradient(circle at 2px 2px, rgb(255,255,255) 1px, transparent 0)",
+              backgroundSize: "50px 50px"
             }}></div>
           </div>
 
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Let's Build Something Amazing Together
+                {"Let's Build Something Amazing Together"}
               </h2>
               <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-                I'm always open to discussing new projects, creative ideas, or
+                {"I'm always open to discussing new projects, creative ideas, or "}
                 opportunities to be part of your vision.
               </p>
 
               <div className="grid md:grid-cols-3 gap-6 mb-12">
                 {[
-                  { icon: '📧', label: 'Email', value: 'your.email@example.com', href: 'mailto:your.email@example.com' },
-                  { icon: '💼', label: 'LinkedIn', value: 'Connect with me', href: 'https://linkedin.com/in/yourprofile' },
-                  { icon: '🐙', label: 'GitHub', value: 'View my work', href: 'https://github.com/yourusername' },
+                  { icon: "📧", label: "Email", value: "your.email@example.com", href: "mailto:your.email@example.com" },
+                  { icon: "💼", label: "LinkedIn", value: "Connect with me", href: "https://linkedin.com/in/yourprofile" },
+                  { icon: "🐙", label: "GitHub", value: "View my work", href: "https://github.com/yourusername" },
                 ].map((contact, index) => (
                   <a
                     key={index}
                     href={contact.href}
-                    target={contact.href.startsWith('http') ? '_blank' : undefined}
-                    rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    target={contact.href.startsWith("http") ? "_blank" : undefined}
+                    rel={contact.href.startsWith("http") ? "noopener noreferrer" : undefined}
                     className="group bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 hover:scale-105"
                   >
                     <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">

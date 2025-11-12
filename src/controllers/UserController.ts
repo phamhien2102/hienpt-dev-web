@@ -1,5 +1,5 @@
 // User controller handling user-related operations
-import { BaseController } from './BaseController';
+import { BaseController } from "./BaseController";
 
 // Mock Express types for Next.js compatibility
 interface Request {
@@ -13,8 +13,8 @@ interface Response {
     json: (data: any) => void;
   };
 }
-import { SupabaseUserModel } from '@/models/SupabaseUserModel';
-import { CreateUserForm, UpdateUserForm } from '@/types';
+import { SupabaseUserModel } from "@/models/SupabaseUserModel";
+import { CreateUserForm, UpdateUserForm } from "@/types";
 
 export class UserController extends BaseController {
   private userModel: SupabaseUserModel;
@@ -30,7 +30,7 @@ export class UserController extends BaseController {
       const { page, limit } = this.getPaginationParams(req);
       const result = await this.userModel.findWithPagination(page, limit);
       return result;
-    }, res, 'Failed to fetch users');
+    }, res, "Failed to fetch users");
   };
 
   // Get user by ID
@@ -40,11 +40,11 @@ export class UserController extends BaseController {
       const user = await this.userModel.findById(id);
       
       if (!user) {
-        throw new Error('User not found');
+        throw new Error("User not found");
       }
       
       return user;
-    }, res, 'Failed to fetch user');
+    }, res, "Failed to fetch user");
   };
 
   // Create new user
@@ -53,14 +53,14 @@ export class UserController extends BaseController {
       const userData: CreateUserForm = req.body;
       
       // Validate required fields
-      const validationError = this.validateRequired(userData, ['name', 'email', 'role']);
+      const validationError = this.validateRequired(userData, ["name", "email", "role"]);
       if (validationError) {
         throw new Error(validationError);
       }
 
       const user = await this.userModel.createUser(userData);
       return user;
-    }, res, 'Failed to create user');
+    }, res, "Failed to create user");
   };
 
   // Update user
@@ -71,11 +71,11 @@ export class UserController extends BaseController {
 
       const user = await this.userModel.updateUser(id, userData);
       if (!user) {
-        throw new Error('User not found');
+        throw new Error("User not found");
       }
 
       return user;
-    }, res, 'Failed to update user');
+    }, res, "Failed to update user");
   };
 
   // Delete user
@@ -85,11 +85,11 @@ export class UserController extends BaseController {
       const deleted = await this.userModel.delete(id);
       
       if (!deleted) {
-        throw new Error('User not found');
+        throw new Error("User not found");
       }
 
-      return { message: 'User deleted successfully' };
-    }, res, 'Failed to delete user');
+      return { message: "User deleted successfully" };
+    }, res, "Failed to delete user");
   };
 
   // Get users by role
@@ -98,7 +98,7 @@ export class UserController extends BaseController {
       const { role } = req.params;
       const users = await this.userModel.findByRole(role as any);
       return users;
-    }, res, 'Failed to fetch users by role');
+    }, res, "Failed to fetch users by role");
   };
 
   // Get active users
@@ -106,20 +106,20 @@ export class UserController extends BaseController {
     await this.handleAsync(async () => {
       const users = await this.userModel.findActiveUsers();
       return users;
-    }, res, 'Failed to fetch active users');
+    }, res, "Failed to fetch active users");
   };
 
   // Search users
   searchUsers = async (req: Request, res: Response): Promise<void> => {
     await this.handleAsync(async () => {
       const { q } = req.query;
-      if (!q || typeof q !== 'string') {
-        throw new Error('Search query is required');
+      if (!q || typeof q !== "string") {
+        throw new Error("Search query is required");
       }
 
-      const users = await this.userModel.search(q, ['name', 'email']);
+      const users = await this.userModel.search(q, ["name", "email"]);
       return users;
-    }, res, 'Failed to search users');
+    }, res, "Failed to search users");
   };
 
   // Get user statistics
@@ -127,7 +127,7 @@ export class UserController extends BaseController {
     await this.handleAsync(async () => {
       const stats = await this.userModel.getStatistics();
       return stats;
-    }, res, 'Failed to fetch user statistics');
+    }, res, "Failed to fetch user statistics");
   };
 
   // Deactivate user
@@ -137,11 +137,11 @@ export class UserController extends BaseController {
       const user = await this.userModel.deactivateUser(id);
       
       if (!user) {
-        throw new Error('User not found');
+        throw new Error("User not found");
       }
 
       return user;
-    }, res, 'Failed to deactivate user');
+    }, res, "Failed to deactivate user");
   };
 
   // Activate user
@@ -151,10 +151,10 @@ export class UserController extends BaseController {
       const user = await this.userModel.activateUser(id);
       
       if (!user) {
-        throw new Error('User not found');
+        throw new Error("User not found");
       }
 
       return user;
-    }, res, 'Failed to activate user');
+    }, res, "Failed to activate user");
   };
 }

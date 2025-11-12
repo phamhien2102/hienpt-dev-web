@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas-pro';
+import { useState } from "react";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas-pro";
 
 interface PDFExportProps {
   contentRef: React.RefObject<HTMLElement | null>;
   filename?: string;
 }
 
-export const PDFExport: React.FC<PDFExportProps> = ({ contentRef, filename = 'CV.pdf' }) => {
+export const PDFExport: React.FC<PDFExportProps> = ({ contentRef, filename = "CV.pdf" }) => {
   const [isGenerating, setIsGenerating] = useState(false);
 
   const generatePDF = async () => {
     if (!contentRef.current) {
-      console.error('Content ref is not available');
+      console.error("Content ref is not available");
       return;
     }
 
@@ -22,16 +22,16 @@ export const PDFExport: React.FC<PDFExportProps> = ({ contentRef, filename = 'CV
 
     try {
       // Hide navigation, footer, and PDF button that shouldn't be in PDF
-      const navigation = document.querySelector('nav');
-      const footer = document.querySelector('footer');
-      const pdfButton = document.querySelector('[data-pdf-button]');
+      const navigation = document.querySelector("nav");
+      const footer = document.querySelector("footer");
+      const pdfButton = document.querySelector("[data-pdf-button]");
       const originalNavDisplay = navigation?.style.display;
       const originalFooterDisplay = footer?.style.display;
-      const originalButtonDisplay = pdfButton ? (pdfButton as HTMLElement).style.display : '';
+      const originalButtonDisplay = pdfButton ? (pdfButton as HTMLElement).style.display : "";
 
-      if (navigation) navigation.style.display = 'none';
-      if (footer) footer.style.display = 'none';
-      if (pdfButton) (pdfButton as HTMLElement).style.display = 'none';
+      if (navigation) navigation.style.display = "none";
+      if (footer) footer.style.display = "none";
+      if (pdfButton) (pdfButton as HTMLElement).style.display = "none";
 
       // Wait a bit to ensure all content is rendered
       await new Promise(resolve => setTimeout(resolve, 200));
@@ -42,17 +42,17 @@ export const PDFExport: React.FC<PDFExportProps> = ({ contentRef, filename = 'CV
         scale: 1.5,
         useCORS: true,
         logging: false,
-        backgroundColor: '#ffffff',
+        backgroundColor: "#ffffff",
         allowTaint: false,
       });
 
       // Restore navigation, footer, and button
-      if (navigation) navigation.style.display = originalNavDisplay || '';
-      if (footer) footer.style.display = originalFooterDisplay || '';
-      if (pdfButton) (pdfButton as HTMLElement).style.display = originalButtonDisplay || '';
+      if (navigation) navigation.style.display = originalNavDisplay || "";
+      if (footer) footer.style.display = originalFooterDisplay || "";
+      if (pdfButton) (pdfButton as HTMLElement).style.display = originalButtonDisplay || "";
 
-      const imgData = canvas.toDataURL('image/png', 1.0);
-      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgData = canvas.toDataURL("image/png", 1.0);
+      const pdf = new jsPDF("p", "mm", "a4");
       
       // Get PDF dimensions in mm
       const pdfWidth = pdf.internal.pageSize.getWidth();
@@ -76,8 +76,6 @@ export const PDFExport: React.FC<PDFExportProps> = ({ contentRef, filename = 'CV
       const totalPages = Math.ceil(scaledHeight / pdfHeight);
       
       // Add image to PDF pages
-      let heightRemaining = scaledHeight;
-      
       for (let page = 0; page < totalPages; page++) {
         if (page > 0) {
           pdf.addPage();
@@ -89,7 +87,7 @@ export const PDFExport: React.FC<PDFExportProps> = ({ contentRef, filename = 'CV
         // Add the full image, positioned to show the correct portion
         pdf.addImage(
           imgData,
-          'PNG',
+          "PNG",
           0,
           yPos,
           scaledWidth,
@@ -100,18 +98,18 @@ export const PDFExport: React.FC<PDFExportProps> = ({ contentRef, filename = 'CV
       // Save the PDF
       pdf.save(filename);
     } catch (error) {
-      console.error('Error generating PDF:', error);
+      console.error("Error generating PDF:", error);
       
       // Restore elements in case of error
-      const navigation = document.querySelector('nav');
-      const footer = document.querySelector('footer');
-      const pdfButton = document.querySelector('[data-pdf-button]');
-      if (navigation) navigation.style.display = '';
-      if (footer) footer.style.display = '';
-      if (pdfButton) (pdfButton as HTMLElement).style.display = '';
+      const navigation = document.querySelector("nav");
+      const footer = document.querySelector("footer");
+      const pdfButton = document.querySelector("[data-pdf-button]");
+      if (navigation) navigation.style.display = "";
+      if (footer) footer.style.display = "";
+      if (pdfButton) (pdfButton as HTMLElement).style.display = "";
       
       // Show more detailed error message
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      const errorMessage = error instanceof Error ? error.message : "Unknown error";
       alert(`Failed to generate PDF: ${errorMessage}. Please check the console for more details.`);
     } finally {
       setIsGenerating(false);

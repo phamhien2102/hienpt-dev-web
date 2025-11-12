@@ -1,6 +1,6 @@
 // User model extending BaseModel
-import { BaseModel } from './BaseModel';
-import { User, CreateUserForm, UpdateUserForm } from '@/types';
+import { BaseModel } from "./BaseModel";
+import { User, CreateUserForm, UpdateUserForm } from "@/types";
 
 export class UserModel extends BaseModel<User> {
   // Find user by email
@@ -9,7 +9,7 @@ export class UserModel extends BaseModel<User> {
   }
 
   // Find users by role
-  async findByRole(role: User['role']): Promise<User[]> {
+  async findByRole(role: User["role"]): Promise<User[]> {
     return this.data.filter(user => user.role === role);
   }
 
@@ -23,18 +23,18 @@ export class UserModel extends BaseModel<User> {
     // Check if email already exists
     const existingUser = await this.findByEmail(userData.email);
     if (existingUser) {
-      throw new Error('User with this email already exists');
+      throw new Error("User with this email already exists");
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(userData.email)) {
-      throw new Error('Invalid email format');
+      throw new Error("Invalid email format");
     }
 
     // Validate name
     if (!userData.name.trim()) {
-      throw new Error('Name is required');
+      throw new Error("Name is required");
     }
 
     return this.create({
@@ -49,19 +49,19 @@ export class UserModel extends BaseModel<User> {
     if (userData.email) {
       const existingUser = await this.findByEmail(userData.email);
       if (existingUser && existingUser.id !== id) {
-        throw new Error('User with this email already exists');
+        throw new Error("User with this email already exists");
       }
 
       // Validate email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(userData.email)) {
-        throw new Error('Invalid email format');
+        throw new Error("Invalid email format");
       }
     }
 
     // Validate name if being updated
     if (userData.name !== undefined && !userData.name.trim()) {
-      throw new Error('Name cannot be empty');
+      throw new Error("Name cannot be empty");
     }
 
     return this.update(id, userData);

@@ -1,10 +1,10 @@
 // Navigation component
-'use client';
+"use client";
 
-import React, { useState, useEffect, useRef } from 'react';
-import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { useAuth } from '@/contexts/AuthContext';
+import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 
 export const Navigation: React.FC = () => {
   const pathname = usePathname();
@@ -65,8 +65,8 @@ export const Navigation: React.FC = () => {
       });
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -80,16 +80,16 @@ export const Navigation: React.FC = () => {
       }, 250);
     };
 
-    window.addEventListener('wheel', markInteracting, { passive: true });
-    window.addEventListener('touchstart', markInteracting, { passive: true });
-    window.addEventListener('touchmove', markInteracting, { passive: true });
-    window.addEventListener('keydown', markInteracting);
+    window.addEventListener("wheel", markInteracting, { passive: true });
+    window.addEventListener("touchstart", markInteracting, { passive: true });
+    window.addEventListener("touchmove", markInteracting, { passive: true });
+    window.addEventListener("keydown", markInteracting);
 
     return () => {
-      window.removeEventListener('wheel', markInteracting);
-      window.removeEventListener('touchstart', markInteracting);
-      window.removeEventListener('touchmove', markInteracting);
-      window.removeEventListener('keydown', markInteracting);
+      window.removeEventListener("wheel", markInteracting);
+      window.removeEventListener("touchstart", markInteracting);
+      window.removeEventListener("touchmove", markInteracting);
+      window.removeEventListener("keydown", markInteracting);
       if (interactionTimeoutRef.current) {
         clearTimeout(interactionTimeoutRef.current);
       }
@@ -97,21 +97,21 @@ export const Navigation: React.FC = () => {
   }, []);
 
   const navItems = [
-    { href: '/', label: 'Home', icon: '🏠' },
-    { href: '/posts', label: 'Blog', icon: '📝' },
-    { href: '/portfolio', label: 'Portfolio', icon: '💼' },
-    { href: '/contact', label: 'Contact', icon: '📧' },
+    { href: "/", label: "Home", icon: "🏠" },
+    { href: "/posts", label: "Blog", icon: "📝" },
+    { href: "/portfolio", label: "Portfolio", icon: "💼" },
+    { href: "/contact", label: "Contact", icon: "📧" },
   ];
 
   // Add admin link if user is admin
-  if (user?.role === 'admin') {
-    navItems.push({ href: '/admin', label: 'Admin', icon: '⚙️' });
+  if (user?.role === "admin") {
+    navItems.push({ href: "/admin", label: "Admin", icon: "⚙️" });
   }
 
   const handleLogout = async () => {
     await logout();
     setShowUserMenu(false);
-    router.push('/');
+    router.push("/");
   };
 
   // Parallax effects
@@ -124,16 +124,16 @@ export const Navigation: React.FC = () => {
       style={{
         backgroundColor: `rgba(255, 255, 255, ${headerBackgroundOpacity})`,
         backdropFilter: `blur(${headerBlur}px)`,
-        boxShadow: scrolled ? '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(229, 231, 235, 0.5)' : 'none',
-        transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+        boxShadow: scrolled ? "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(229, 231, 235, 0.5)" : "none",
+        transform: isVisible ? "translateY(0)" : "translateY(-100%)",
       }}
     >
       <div className="container mx-auto px-4">
         <div 
           className="flex justify-between items-center transition-all duration-300"
           style={{
-            height: scrolled ? '4rem' : '5rem',
+            height: scrolled ? "4rem" : "5rem",
           }}
         >
           {/* Logo */}
@@ -146,7 +146,7 @@ export const Navigation: React.FC = () => {
               <div 
                 className="relative font-black text-gray-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 transition-all duration-300"
                 style={{
-                  fontSize: scrolled ? '1.25rem' : '1.5rem',
+                  fontSize: scrolled ? "1.25rem" : "1.5rem",
                 }}
               >
                 Blog Spot.
@@ -164,35 +164,35 @@ export const Navigation: React.FC = () => {
                   href={item.href}
                   className={`relative rounded-full font-medium transition-all duration-300 group ${
                     isActive
-                      ? 'text-gray-900'
-                      : 'text-gray-600 hover:text-gray-900'
+                      ? "text-gray-900"
+                      : "text-gray-600 hover:text-gray-900"
                   }`}
                   style={{
-                    padding: scrolled ? '0.5rem 1rem' : '0.625rem 1rem',
-                    fontSize: scrolled ? '0.875rem' : '0.9375rem',
+                    padding: scrolled ? "0.5rem 1rem" : "0.625rem 1rem",
+                    fontSize: scrolled ? "0.875rem" : "0.9375rem",
                   }}
                 >
                   {isActive && (
                     <span 
                       className="absolute inset-0 bg-gray-100 rounded-full -z-10"
                       style={{
-                        animation: 'slideInFromLeft 0.3s ease-out',
+                        animation: "slideInFromLeft 0.3s ease-out",
                       }}
                     ></span>
                   )}
                   <span className="flex items-center gap-2 relative z-10">
                     <span 
                       style={{ 
-                        fontSize: scrolled ? '0.875rem' : '1rem',
-                        animation: isActive ? 'slideInFromLeft 0.3s ease-out' : 'none',
+                        fontSize: scrolled ? "0.875rem" : "1rem",
+                        animation: isActive ? "slideInFromLeft 0.3s ease-out" : "none",
                       }}
                     >
                       {item.icon}
                     </span>
                     <span 
-                      className={isActive ? 'font-semibold' : ''}
+                      className={isActive ? "font-semibold" : ""}
                       style={{
-                        animation: isActive ? 'slideInFromRight 0.3s ease-out' : 'none',
+                        animation: isActive ? "slideInFromRight 0.3s ease-out" : "none",
                       }}
                     >
                       {item.label}
@@ -287,9 +287,9 @@ export const Navigation: React.FC = () => {
               aria-label="Menu"
             >
               <div className="flex flex-col gap-1.5">
-                <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${showMobileMenu ? 'rotate-45 translate-y-2' : ''}`}></span>
-                <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${showMobileMenu ? 'opacity-0' : ''}`}></span>
-                <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${showMobileMenu ? '-rotate-45 -translate-y-2' : ''}`}></span>
+                <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${showMobileMenu ? "rotate-45 translate-y-2" : ""}`}></span>
+                <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${showMobileMenu ? "opacity-0" : ""}`}></span>
+                <span className={`w-6 h-0.5 bg-gray-700 transition-all duration-300 ${showMobileMenu ? "-rotate-45 -translate-y-2" : ""}`}></span>
               </div>
             </button>
           </div>
@@ -308,25 +308,25 @@ export const Navigation: React.FC = () => {
                     onClick={() => setShowMobileMenu(false)}
                     className={`relative flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all duration-300 ${
                       isActive
-                        ? 'text-gray-900 bg-gray-100'
-                        : 'text-gray-600 hover:bg-gray-50'
+                        ? "text-gray-900 bg-gray-100"
+                        : "text-gray-600 hover:bg-gray-50"
                     }`}
                   >
                     {isActive && (
                       <span
                         className="absolute inset-0 bg-gray-100 rounded-xl -z-10"
-                        style={{ animation: 'slideInFromLeft 0.3s ease-out' }}
+                        style={{ animation: "slideInFromLeft 0.3s ease-out" }}
                       ></span>
                     )}
                     <span
                       className="text-lg"
-                      style={{ animation: isActive ? 'slideInFromLeft 0.3s ease-out' : 'none' }}
+                      style={{ animation: isActive ? "slideInFromLeft 0.3s ease-out" : "none" }}
                     >
                       {item.icon}
                     </span>
                     <span
-                      className={isActive ? 'font-semibold' : ''}
-                      style={{ animation: isActive ? 'slideInFromRight 0.3s ease-out' : 'none' }}
+                      className={isActive ? "font-semibold" : ""}
+                      style={{ animation: isActive ? "slideInFromRight 0.3s ease-out" : "none" }}
                     >
                       {item.label}
                     </span>

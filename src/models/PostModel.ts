@@ -1,6 +1,6 @@
 // Post model extending BaseModel
-import { BaseModel } from './BaseModel';
-import { Post, CreatePostForm, UpdatePostForm } from '@/types';
+import { BaseModel } from "./BaseModel";
+import { Post, CreatePostForm, UpdatePostForm } from "@/types";
 
 export class PostModel extends BaseModel<Post> {
   // Find posts by author
@@ -29,17 +29,17 @@ export class PostModel extends BaseModel<Post> {
   async createPost(postData: CreatePostForm, authorId: string): Promise<Post> {
     // Validate title
     if (!postData.title.trim()) {
-      throw new Error('Title is required');
+      throw new Error("Title is required");
     }
 
     // Validate content
     if (!postData.content.trim()) {
-      throw new Error('Content is required');
+      throw new Error("Content is required");
     }
 
     // Validate tags
     if (!Array.isArray(postData.tags)) {
-      throw new Error('Tags must be an array');
+      throw new Error("Tags must be an array");
     }
 
     return this.create({
@@ -52,17 +52,17 @@ export class PostModel extends BaseModel<Post> {
   async updatePost(id: string, postData: UpdatePostForm): Promise<Post | null> {
     // Validate title if being updated
     if (postData.title !== undefined && !postData.title.trim()) {
-      throw new Error('Title cannot be empty');
+      throw new Error("Title cannot be empty");
     }
 
     // Validate content if being updated
     if (postData.content !== undefined && !postData.content.trim()) {
-      throw new Error('Content cannot be empty');
+      throw new Error("Content cannot be empty");
     }
 
     // Validate tags if being updated
     if (postData.tags !== undefined && !Array.isArray(postData.tags)) {
-      throw new Error('Tags must be an array');
+      throw new Error("Tags must be an array");
     }
 
     return this.update(id, postData);

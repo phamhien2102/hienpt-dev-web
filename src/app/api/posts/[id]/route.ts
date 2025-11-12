@@ -1,7 +1,7 @@
 // API route for individual post operations
-import { NextRequest, NextResponse } from 'next/server';
-import { PostController } from '@/controllers/PostController';
-import { createCorsResponse, createCorsOptionsResponse } from '@/utils/cors';
+import { NextRequest, NextResponse } from "next/server";
+import { PostController } from "@/controllers/PostController";
+import { createCorsResponse, createCorsOptionsResponse } from "@/utils/cors";
 
 
 const postController = new PostController();
@@ -15,48 +15,48 @@ export async function GET(
   
   // Check if Supabase is properly configured
   const isSupabaseConfigured = process.env.NEXT_PUBLIC_SUPABASE_URL && 
-    process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co';
+    process.env.NEXT_PUBLIC_SUPABASE_URL !== "https://placeholder.supabase.co";
 
   if (!isSupabaseConfigured) {
     // Return sample data when Supabase is not configured
     const samplePosts = [
       {
-        id: '1',
-        title: 'Welcome to MVC Architecture',
-        content: 'This is a comprehensive guide to understanding Model-View-Controller pattern in modern web development.',
-        authorId: '1',
+        id: "1",
+        title: "Welcome to MVC Architecture",
+        content: "This is a comprehensive guide to understanding Model-View-Controller pattern in modern web development.",
+        authorId: "1",
         published: true,
-        tags: ['architecture', 'mvc', 'web-development'],
+        tags: ["architecture", "mvc", "web-development"],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       },
       {
-        id: '2',
-        title: 'Getting Started with Supabase',
-        content: 'Learn how to integrate Supabase with your Next.js application for a complete backend solution.',
-        authorId: '2',
+        id: "2",
+        title: "Getting Started with Supabase",
+        content: "Learn how to integrate Supabase with your Next.js application for a complete backend solution.",
+        authorId: "2",
         published: true,
-        tags: ['supabase', 'nextjs', 'database'],
+        tags: ["supabase", "nextjs", "database"],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       },
       {
-        id: '3',
-        title: 'TypeScript Best Practices',
-        content: 'Essential TypeScript patterns and practices for building scalable applications.',
-        authorId: '3',
+        id: "3",
+        title: "TypeScript Best Practices",
+        content: "Essential TypeScript patterns and practices for building scalable applications.",
+        authorId: "3",
         published: false,
-        tags: ['typescript', 'programming', 'best-practices'],
+        tags: ["typescript", "programming", "best-practices"],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       },
       {
-        id: '4',
-        title: 'React Hooks Deep Dive',
-        content: 'Understanding React hooks and their advanced usage patterns.',
-        authorId: '4',
+        id: "4",
+        title: "React Hooks Deep Dive",
+        content: "Understanding React hooks and their advanced usage patterns.",
+        authorId: "4",
         published: true,
-        tags: ['react', 'hooks', 'frontend'],
+        tags: ["react", "hooks", "frontend"],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }
@@ -66,7 +66,7 @@ export async function GET(
     
     if (!post) {
       return createCorsResponse(
-        { success: false, error: 'Post not found' },
+        { success: false, error: "Post not found" },
         404
       );
     }
@@ -74,7 +74,7 @@ export async function GET(
     return createCorsResponse({
       success: true,
       data: post,
-      message: 'Sample data - Configure Supabase for real data'
+      message: "Sample data - Configure Supabase for real data"
     });
   }
 
@@ -108,14 +108,14 @@ export async function GET(
     if (!responseData) {
       return createCorsResponse({ 
         success: false, 
-        error: 'No data returned from controller'
+        error: "No data returned from controller"
       }, 500);
     }
     
     return createCorsResponse(responseData);
   } catch (error) {
     return createCorsResponse(
-      { success: false, error: 'Internal server error' },
+      { success: false, error: "Internal server error" },
       500
     );
   }
@@ -131,12 +131,12 @@ export async function PUT(
 
   // Check if Supabase is properly configured
   const isSupabaseConfigured = process.env.NEXT_PUBLIC_SUPABASE_URL && 
-    process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co';
+    process.env.NEXT_PUBLIC_SUPABASE_URL !== "https://placeholder.supabase.co";
 
   if (!isSupabaseConfigured) {
     return createCorsResponse({
       success: false,
-      error: 'Supabase not configured. Please set up Supabase to update posts.'
+      error: "Supabase not configured. Please set up Supabase to update posts."
     }, 400);
   }
 
@@ -170,14 +170,14 @@ export async function PUT(
     if (!responseData) {
       return createCorsResponse({ 
         success: false, 
-        error: 'No data returned from controller'
+        error: "No data returned from controller"
       }, 500);
     }
     
     return createCorsResponse(responseData);
   } catch (error) {
     return createCorsResponse(
-      { success: false, error: 'Internal server error' },
+      { success: false, error: "Internal server error" },
       500
     );
   }
@@ -192,12 +192,12 @@ export async function DELETE(
 
   // Check if Supabase is properly configured
   const isSupabaseConfigured = process.env.NEXT_PUBLIC_SUPABASE_URL && 
-    process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://placeholder.supabase.co';
+    process.env.NEXT_PUBLIC_SUPABASE_URL !== "https://placeholder.supabase.co";
 
   if (!isSupabaseConfigured) {
     return createCorsResponse({
       success: false,
-      error: 'Supabase not configured. Please set up Supabase to delete posts.'
+      error: "Supabase not configured. Please set up Supabase to delete posts."
     }, 400);
   }
 
@@ -231,14 +231,14 @@ export async function DELETE(
     if (!responseData) {
       return createCorsResponse({ 
         success: false, 
-        error: 'No data returned from controller'
+        error: "No data returned from controller"
       }, 500);
     }
     
     return createCorsResponse(responseData);
   } catch (error) {
     return createCorsResponse(
-      { success: false, error: 'Internal server error' },
+      { success: false, error: "Internal server error" },
       500
     );
   }
