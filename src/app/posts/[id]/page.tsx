@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/views/components/Navigation";
-import { getRequestBaseUrl } from "@/utils/url";
 
 interface Post {
   id: string;
@@ -17,23 +16,47 @@ interface Post {
 }
 
 async function fetchPost(postId: string): Promise<Post | null> {
-  const baseUrl = await getRequestBaseUrl();
-  const response = await fetch(`${baseUrl}/api/posts/${postId}`, {
-    cache: "no-store",
-  });
+  try {
+    const response = await fetch(`/api/posts/${postId}`, {
+      cache: "no-store",
+    });
 
-  if (response.status === 404) {
+    if (response.status === 404) {
+      return null;
+    }
+
+    if (!response.ok) {
+      console.error(`Failed to fetch post: ${response.status} ${response.statusText}`);
+      return null;
+    }
+
+    const payload = await response.json();
+    
+    // Handle different response structures
+    if (!payload) {
+      console.error("Empty response payload");
+      return null;
+    }
+
+    // Check if response indicates failure
+    if (payload.success === false) {
+      console.error("API returned error:", payload.error);
+      return null;
+    }
+
+    // Extract post data - handle both { data: post } and direct post object
+    const post: Post | undefined = payload?.data ?? payload;
+
+    if (!post || !post.id) {
+      console.error("Invalid post data structure:", payload);
+      return null;
+    }
+
+    return post;
+  } catch (error) {
+    console.error("Error fetching post:", error);
     return null;
   }
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch post");
-  }
-
-  const payload = await response.json();
-  const post: Post | undefined = payload?.data;
-
-  return post ?? null;
 }
 
 const formatDate = (date?: string) => {
