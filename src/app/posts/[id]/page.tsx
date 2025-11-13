@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Navigation } from "@/views/components/Navigation";
+import { headers } from "next/headers";
 
 interface Post {
   id: string;
@@ -17,7 +18,21 @@ interface Post {
 
 async function fetchPost(postId: string): Promise<Post | null> {
   try {
-    const response = await fetch(`/api/posts/${postId}`, {
+    // Get base URL for server-side fetch
+    // Priority order:
+    // 1. NEXT_PUBLIC_SITE_URL - manually set in .env (for production domain)
+    // 2. VERCEL_URL - auto-provided by Vercel (for preview deployments)
+    // 3. From request headers (for local development or other platforms)
+    const headersList = await headers();
+    const protocol = headersList.get("x-forwarded-proto") || "http";
+    const host = headersList.get("x-forwarded-host") || headersList.get("host") || "localhost:3000";
+    
+    const baseUrl = 
+      process.env.NEXT_PUBLIC_SITE_URL || // Your custom production URL
+      (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) || // Vercel auto URL
+      `${protocol}://${host}`; // Fallback to request headers
+
+    const response = await fetch(`${baseUrl}/api/posts/${postId}`, {
       cache: "no-store",
     });
 

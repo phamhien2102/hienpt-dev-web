@@ -7,6 +7,8 @@ import { createCorsResponse, createCorsOptionsResponse } from "@/utils/cors";
 const postController = new PostController();
 
 // GET /api/posts/[id] - Get post by ID
+// This endpoint is PUBLIC - no authentication required
+// Users can access any published post without logging in
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
