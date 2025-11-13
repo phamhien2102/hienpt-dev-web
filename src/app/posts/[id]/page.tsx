@@ -52,9 +52,10 @@ const formatDate = (date?: string) => {
 export default async function PostDetailPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const post = await fetchPost(params.id);
+  const resolvedParams = await params;
+  const post = await fetchPost(resolvedParams.id);
 
   if (!post || post.published === false) {
     notFound();
